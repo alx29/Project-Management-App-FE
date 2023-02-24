@@ -9,14 +9,6 @@ function Login() {
       <form className='login'>
         <h2 className='pageTitle'>Log in</h2>
         <label>
-          <div>first name:</div>
-          <input type='text'></input>
-        </label>
-        <label>
-          <div>last name:</div>
-          <input type='text'></input>
-        </label>
-        <label>
           <div>email:</div>
           <input type='email'></input>
         </label>
