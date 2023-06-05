@@ -2,24 +2,18 @@
 
 .navbar {
   width: 100%;
-  font-family: Poppins, sans-serif; 
+  font-family: Poppins, sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-  ul {
-    list-style-type: none;
-    display: flex;
-    gap: 2rem;
-    
-    li {
-      cursor: pointer;
-    }
+  .navbarElement {
+    margin-right: 40px;
+    cursor: pointer;
 
     .logo {
-      display: flex;
-      align-items: center;
-
-      .axp {
-        padding-left: 0.5rem;
-      }
+      width: 60px;
+      height: 60px;
     }
   }
 }

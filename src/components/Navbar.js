@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import '../styles/Navbar.scss';
-import Temple from '../assets/temple.svg';
+import AXP from '../assets/AXP.svg';
 import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
@@ -20,16 +20,17 @@ function Navbar() {
 
   return (
     <div className='navbar'>
-      <ul>
-        <li className='logo'>
-          <img src={Temple} alt='axp logo' />
-          <div className='axp'>AXP Management</div>
-        </li>
-        <li onClick={navigateToLogin}>Login</li>
-        <li onClick={navigateToSignup}>Signup</li>
-      </ul>
+      <div className='navbarElement'>
+        <img src={AXP} className='logo' alt='axp logo' />
+      </div>
+      <div className='navbarElement' onClick={navigateToLogin}>
+        Login
+      </div>
+      <div className='navbarElement' onClick={navigateToSignup}>
+        Signup
+      </div>
     </div>
   );
 }
 
-export default Navbar
+export default Navbar;
