@@ -1,7 +1,7 @@
 import React from 'react';
-import '../styles/Login.scss';
+import '../../styles/Login.scss';
 import Navbar from './Navbar';
-import useLoginForm from '../hooks/useLoginForm';
+import useLoginForm from '../../hooks/useLoginForm';
 
 function Login() {
   const { formData, handleInputChange, handleSubmit } = useLoginForm();

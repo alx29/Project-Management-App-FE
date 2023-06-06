@@ -1,8 +1,8 @@
 import React from 'react';
 import Navbar from './Navbar';
-import '../styles/Login.scss';
+import '../../styles/Login.scss';
 import Select from 'react-select';
-import useSignupForm from '../hooks/useSignupForm';
+import useSignupForm from '../../hooks/useSignupForm';
 
 function Signup() {
   const {

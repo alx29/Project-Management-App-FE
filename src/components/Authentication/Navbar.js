@@ -1,6 +1,6 @@
 import React from 'react';
-import '../styles/Navbar.scss';
-import AXP from '../assets/AXP.svg';
+import '../../styles/Navbar.scss';
+import AXP from '../../assets/AXP.svg';
 import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
