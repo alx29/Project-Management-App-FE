@@ -15,25 +15,25 @@ export default function Sidebar() {
       </div>
       <div className='item'>
         <NavLink exact to='/'>
-          <DashboardIcon />
+          <DashboardIcon className='icon' />
           <span>Dashboard</span>
         </NavLink>
       </div>
       <div className='item'>
         <NavLink to='/createProject'>
-          <AddBoxIcon />
+          <AddBoxIcon className='icon' />
           <span>New Project</span>
         </NavLink>
       </div>
       <div className='item'>
         <NavLink to='/'>
-          <TaskIcon />
+          <TaskIcon className='icon' />
           <span>My Tasks</span>
         </NavLink>
       </div>
       <div className='item'>
         <NavLink to='/'>
-          <LogoutIcon />
+          <LogoutIcon className='icon' />
           <span>Log Out</span>
         </NavLink>
       </div>

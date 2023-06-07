@@ -57,6 +57,7 @@ function Signup() {
           ></input>
         </label>
         <label className='selectMargin'>
+          <div className='divMargin'>role:</div>
           <Select
             options={options}
             value={role}
