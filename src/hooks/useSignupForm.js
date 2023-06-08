@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { SIGNUP } from '../endpoints';
 
 function useSignupForm() {
   const options = [
@@ -49,7 +50,7 @@ function useSignupForm() {
 
     try {
       const response = await axios.post(
-        'http://localhost:3000/users/signup',
+        SIGNUP,
         formData
       );
       console.log(response.data);

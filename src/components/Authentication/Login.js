@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/Login.scss';
+import '../../styles/Login.css';
 import Navbar from './Navbar';
 import useLoginForm from '../../hooks/useLoginForm';
 

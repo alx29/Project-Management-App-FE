@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/Navbar.scss';
+import '../../styles/Navbar.css';
 import AXP from '../../assets/AXP.svg';
 import { useNavigate } from 'react-router-dom';
 

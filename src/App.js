@@ -1,9 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './components/Authentication/Login';
 import Signup from './components/Authentication/Signup';
-import Sidebar from './components/Sidebar';
-import CreateProject from './components/Authentication/CreateProject';
-import Create from './components/Authentication/Create';
+import Create from './components/Projects/Create';
+import Projects from './components/Projects/Projects';
 
 function App() {
   return (
@@ -13,6 +12,7 @@ function App() {
           <Route path='/' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/create' element={<Create />} />
+          <Route path='/projects' element={<Projects />} />
         </Routes>
       </BrowserRouter>
     </div>

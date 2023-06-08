@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from './Navbar';
-import '../../styles/Login.scss';
+import '../../styles/Login.css';
 import Select from 'react-select';
 import useSignupForm from '../../hooks/useSignupForm';
 

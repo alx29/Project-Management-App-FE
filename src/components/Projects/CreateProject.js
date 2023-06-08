@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Select from 'react-select';
-import Sidebar from '../Sidebar';
-import '../../styles/Login.scss';
+import '../../styles/Login.css';
 import axios from 'axios';
 
 const categories = [
@@ -11,7 +10,14 @@ const categories = [
   { value: 'marketing', label: 'Marketing' },
 ];
 
+const statuses = [
+  {value: 'to do', label: 'to do'},
+  {value: 'doing', label: 'doing'},
+  {value: 'done', label: 'done'},
+]
+
 export default function CreateProject() {
+  const [status, setStatus] = useState(null); 
   const [category, setCategory] = useState(null);
   const [projectManager, setProjectManager] = useState(null);
   const [options, setOptions] = useState([]);
@@ -22,6 +28,7 @@ export default function CreateProject() {
     endDate: new Date(),
     budget: 0,
     category: '',
+    status: '',
     projectManager: '',
   });
 
@@ -29,10 +36,18 @@ export default function CreateProject() {
     fetchData();
   }, []);
 
+  const handleStatusChnage = (newStatus) => {
+    setStatus(newStatus);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      status: newStatus.value,
+    }));
+  };
+
   const fetchData = async () => {
     try {
-      const jwt =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsZXgiLCJzdWIiOiI2NDU2MjllMjliMzBlZTdhYzJiM2UxNzEiLCJyb2xlIjoicHJvamVjdF9tYW5hZ2VyIiwiaWF0IjoxNjg2MDg1NjExLCJleHAiOjE2ODYxNzIwMTF9.8hOU0KDEFxh0PIJOZVikksKH_ySIDtj_fYe0rl2TR9A';
+      const jwt = localStorage.getItem('access_token');
       const response = await axios.get('http://localhost:3000/all_users', {
         headers: {
           Authorization: `Bearer ${jwt}`,
@@ -60,30 +75,27 @@ export default function CreateProject() {
     console.log(formData);
   };
 
-  const handleCategoryChange = (category) => {
-    setCategory(category);
-    console.log(category.value);
+  const handleCategoryChange = (newCategory) => {
+    setCategory(newCategory);
     setFormData((prevData) => ({
       ...prevData,
-      category: category.value,
+      category: newCategory.value,
     }));
   };
 
-  const handleProjectManagerChange = (projectManager) => {
-    setProjectManager(projectManager);
+  const handleProjectManagerChange = (newProjectManager) => {
+    setProjectManager(newProjectManager);
 
-    console.log(projectManager.value);
     setFormData((prevData) => ({
       ...prevData,
-      projectManager: projectManager.value,
+      projectManager: newProjectManager.value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const jwt =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsZXgyOWFuZHJlaSIsInN1YiI6IjY0N2FmMTZjODA4YjAyMDMzZGY1ZjNjYiIsInJvbGUiOiJwcm9qZWN0X21hbmFnZXIiLCJpYXQiOjE2ODYxMjU5MjksImV4cCI6MTY4NjIxMjMyOX0.ilUklprOnDPGJfkrrl-X-_5ACY_TKpOi0Jl7BAIJH_g';
+      const jwt = localStorage.getItem('access_token');
       const response = await axios.post(
         'http://localhost:3000/projects/create_project',formData,
         {
@@ -100,7 +112,7 @@ export default function CreateProject() {
 
   return (
     <div className='loginContainer'>
-      <h2 className='page-title'>Create a new Project</h2>
+      <div className='pageTitle'>Create a new Project</div>
       <form className='login' onSubmit={handleSubmit}>
         <label>
           <div>Project name:</div>
@@ -147,6 +159,14 @@ export default function CreateProject() {
             options={categories}
             value={category}
             onChange={handleCategoryChange}
+          />
+        </label>
+        <label className='selectMargin'>
+          <div className='divMargin'>Status</div>
+          <Select
+            options={statuses}
+            value={status}
+            onChange={handleStatusChnage}
           />
         </label>
         <label className='selectMargin'>

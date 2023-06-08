@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/Create.scss';
+import '../../styles/Create.css';
 import Sidebar from '../Sidebar';
 import CreateProject from './CreateProject';
 

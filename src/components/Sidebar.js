@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import '../styles/Sidebar.scss';
+import '../styles/Sidebar.css';
 import TaskIcon from '@mui/icons-material/Task';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -20,7 +20,7 @@ export default function Sidebar() {
         </NavLink>
       </div>
       <div className='item'>
-        <NavLink to='/createProject'>
+        <NavLink to='/create'>
           <AddBoxIcon className='icon' />
           <span>New Project</span>
         </NavLink>

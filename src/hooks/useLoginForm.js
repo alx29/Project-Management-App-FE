@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { LOGIN } from '../endpoints.js';
+import { useNavigate } from 'react-router-dom';
 
 function useLoginForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -20,10 +23,12 @@ function useLoginForm() {
 
     try {
       const response = await axios.post(
-        'http://localhost:3000/auth/login',
+        LOGIN,
         formData
       );
-      console.log(response.data);
+      console.log(response.data.access_token);
+      localStorage.setItem('access_token', response.data.access_token);
+      navigate('/projects');
     } catch (error) {
       console.log(error);
     }

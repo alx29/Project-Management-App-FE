@@ -1,6 +1,6 @@
 import React from 'react';
 import AXP from '../assets/AXP.svg';
-import '../styles/Logo.scss';
+import '../styles/Logo.css';
 
 function Logo(props) {
   const { paddingLeft } = props;
