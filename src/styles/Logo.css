@@ -1,9 +1,8 @@
 .navbarElement {
   cursor: pointer;
   background-color: f4f4f4;
-
-  .logo {
-    width: 60px;
-    height: 60px;
-  }
+}
+.navbarElement .logo {
+  width: 60px;
+  height: 60px;
 }

@@ -1,0 +1,33 @@
+.projectsContainer {
+  display: flex;
+  flex: 1 1 0;
+}
+.projectsContainer .projects {
+  flex: 1;
+}
+.projectsContainer .projects .title {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  font-weight: bold;
+  font-size: 20px;
+}
+.projectsContainer .projects .filter {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0px;
+}
+.projectsContainer .projects .categories {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+  /* padding: 0px 300px; */
+  /*media query pentru scos padding cand se micsoreaza ecranul*/
+}
+.projectsContainer .projects .displayProjects {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);;
+  justify-items: center;
+  gap: 20px;
+}
