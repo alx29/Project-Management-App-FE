@@ -14,7 +14,7 @@ export default function Sidebar() {
         <p>Hi, Alex Paraschiv</p>
       </div>
       <div className='item'>
-        <NavLink exact to='/'>
+        <NavLink exact to='/projects'>
           <DashboardIcon className='icon' />
           <span>Dashboard</span>
         </NavLink>
@@ -26,7 +26,7 @@ export default function Sidebar() {
         </NavLink>
       </div>
       <div className='item'>
-        <NavLink to='/'>
+        <NavLink to='/tasks'>
           <TaskIcon className='icon' />
           <span>My Tasks</span>
         </NavLink>

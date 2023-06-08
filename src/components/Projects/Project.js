@@ -4,6 +4,7 @@ import CodeIcon from '@mui/icons-material/Code';
 import BrushIcon from '@mui/icons-material/Brush';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import { useNavigate } from 'react-router-dom';
 
 const monthNames = [
   "January", "February", "March", "April", "May", "June", 
@@ -12,6 +13,7 @@ const monthNames = [
 
 
 function Project({project}) {
+  const navigate = useNavigate();
   const [color, setColor] = useState('');
   const {name, description, startDate, endDate, budget, status, category, projectManager} = project;
   useEffect(() => {
@@ -39,8 +41,20 @@ function Project({project}) {
     return spelledDate;
   }
 
+  const seeProject = () => {
+    sessionStorage.setItem('name', name);
+    sessionStorage.setItem('description', description);
+    sessionStorage.setItem('startDate', startDate);
+    sessionStorage.setItem('endDate', endDate);
+    sessionStorage.setItem('budget', budget);
+    sessionStorage.setItem('status', status);
+    sessionStorage.setItem('category', category);
+    sessionStorage.setItem('projectManager', projectManager);
+    navigate('/projects/projectPage');
+  }
+
   return (
-    <div className='projectContainer' style={styleColor}>
+    <div className='projectContainer' style={styleColor} onClick={seeProject}>
       <div className='project'>
         {category === 'development' && <CodeIcon />}
         {category === 'design' && <BrushIcon />}
