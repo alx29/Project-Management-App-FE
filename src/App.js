@@ -4,6 +4,7 @@ import Signup from './components/Authentication/Signup';
 import Create from './components/Projects/Create';
 import Projects from './components/Projects/Projects';
 import ProjectPage from './components/Projects/ProjectPage';
+import Tasks from './components/Tasks/Tasks';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/create' element={<Create />} />
           <Route path='/projects' element={<Projects />} />
           <Route path='/projects/projectPage' element={<ProjectPage />} />
+          <Route path='/tasks' element={<Tasks />} />
         </Routes>
       </BrowserRouter>
     </div>

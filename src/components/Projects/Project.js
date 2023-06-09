@@ -15,7 +15,7 @@ const monthNames = [
 function Project({project}) {
   const navigate = useNavigate();
   const [color, setColor] = useState('');
-  const {name, description, startDate, endDate, budget, status, category, projectManager} = project;
+  const {name, description, startDate, endDate, budget, status, category, projectManager, _id} = project;
   useEffect(() => {
     if (category === 'development') {
       setColor('#b52b79');
@@ -50,6 +50,7 @@ function Project({project}) {
     sessionStorage.setItem('status', status);
     sessionStorage.setItem('category', category);
     sessionStorage.setItem('projectManager', projectManager);
+    sessionStorage.setItem('_id', _id);
     navigate('/projects/projectPage');
   }
 
