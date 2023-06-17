@@ -7,20 +7,39 @@ import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import { useNavigate } from 'react-router-dom';
 
 const monthNames = [
-  "January", "February", "March", "April", "May", "June", 
-  "July", "August", "September", "October", "November", "December"
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];
 
-
-function Project({project}) {
+function Project({ project }) {
   const navigate = useNavigate();
   const [color, setColor] = useState('');
-  const {name, description, startDate, endDate, budget, status, category, projectManager, _id} = project;
+  const {
+    name,
+    description,
+    startDate,
+    endDate,
+    budget,
+    status,
+    category,
+    projectManager,
+    _id,
+  } = project;
   useEffect(() => {
     if (category === 'development') {
       setColor('#b52b79');
     } else if (category === 'design') {
-      setColor('#BFDFEB')
+      setColor('#BFDFEB');
     } else if (category === 'sales') {
       setColor('#FF0000');
     } else if (category === 'marketing') {
@@ -29,17 +48,17 @@ function Project({project}) {
   }, []);
   const styleColor = {
     backgroundColor: color,
-  }
+  };
 
   const customizeDate = () => {
     const date = new Date(endDate);
 
     const day = date.getDate();
     const month = date.getMonth();
-    const spelledDate = day + " " + monthNames[month];
+    const spelledDate = day + ' ' + monthNames[month];
 
     return spelledDate;
-  }
+  };
 
   const seeProject = () => {
     sessionStorage.setItem('name', name);
@@ -51,8 +70,8 @@ function Project({project}) {
     sessionStorage.setItem('category', category);
     sessionStorage.setItem('projectManager', projectManager);
     sessionStorage.setItem('_id', _id);
-    navigate('/projects/projectPage');
-  }
+    navigate(`/projects/projectPage/${_id}`);
+  };
 
   return (
     <div className='projectContainer' style={styleColor} onClick={seeProject}>
@@ -65,8 +84,7 @@ function Project({project}) {
       </div>
       <div className='date'>{customizeDate()}</div>
     </div>
-    
-  )
+  );
 }
 
-export default Project
+export default Project;
