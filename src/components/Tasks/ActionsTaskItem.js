@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BtnEditTask from './BtnEditTask';
 import BtnMarkAsImportant from './BtnMarkAsImportant';
 import BtnDeleteTask from './BtnDeleteTask';
 import BtnToggleCompleted from './BtnToggleCompleted';
 
-const ActionsTaskItem = ({ task, isListInView1 }) => {
+const ActionsTaskItem = ({ task, isListInView1, onRefresh }) => {
   const { _id, completed, important } = task;
 
   return (
@@ -18,10 +18,11 @@ const ActionsTaskItem = ({ task, isListInView1 }) => {
           taskCompleted={completed}
           taskId={_id}
           isListInView1={isListInView1}
+          onRefresh={onRefresh}
         />
         <BtnMarkAsImportant taskId={_id} taskImportant={important} />
-        <BtnDeleteTask taskId={_id} />
-        <BtnEditTask task={task} />
+        <BtnDeleteTask taskId={_id} onRefresh={onRefresh} />
+        <BtnEditTask task={task} onRefresh={onRefresh} nameForm={'Edit task'} />
       </div>
     </>
   );

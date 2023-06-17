@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import InfosTask from './InfosTask';
 import ActionsTaskItem from './ActionsTaskItem';
 
-const TaskItem = ({ isListInView1, task }) => {
+const TaskItem = ({ isListInView1, task, onRefresh }) => {
   const { projectName, _id } = task;
 
   return (
@@ -22,11 +22,15 @@ const TaskItem = ({ isListInView1, task }) => {
           }`}
         >
           <InfosTask task={task} isListInView1={isListInView1} />
-          <ActionsTaskItem task={task} isListInView1={isListInView1} />
+          <ActionsTaskItem
+            task={task}
+            isListInView1={isListInView1}
+            onRefresh={onRefresh}
+          />
         </article>
       </li>
     </>
   );
 };
 
-export default React.memo(TaskItem);
+export default TaskItem;

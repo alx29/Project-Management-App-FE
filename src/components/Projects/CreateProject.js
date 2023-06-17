@@ -11,13 +11,13 @@ const categories = [
 ];
 
 const statuses = [
-  {value: 'to do', label: 'to do'},
-  {value: 'doing', label: 'doing'},
-  {value: 'done', label: 'done'},
-]
+  { value: 'to do', label: 'to do' },
+  { value: 'doing', label: 'doing' },
+  { value: 'done', label: 'done' },
+];
 
 export default function CreateProject() {
-  const [status, setStatus] = useState(null); 
+  const [status, setStatus] = useState(null);
   const [category, setCategory] = useState(null);
   const [projectManager, setProjectManager] = useState(null);
   const [options, setOptions] = useState([]);
@@ -72,7 +72,6 @@ export default function CreateProject() {
       ...prevData,
       [name]: value,
     }));
-    console.log(formData);
   };
 
   const handleCategoryChange = (newCategory) => {
@@ -97,14 +96,14 @@ export default function CreateProject() {
     try {
       const jwt = localStorage.getItem('access_token');
       const response = await axios.post(
-        'http://localhost:3000/projects/create_project',formData,
+        'http://localhost:3000/projects/create_project',
+        formData,
         {
           headers: {
             Authorization: `Bearer ${jwt}`,
           },
         }
       );
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }

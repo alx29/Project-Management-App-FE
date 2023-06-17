@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as SvgX } from '../../assets/x.svg';
 import { ReactComponent as Check } from '../../assets/check.svg';
 import axios from 'axios';
 import { UPDATE_TASK } from '../../endpoints.js';
 
-const BtnToggleCompleted = ({ taskCompleted, taskId, isListInView1 }) => {
+const BtnToggleCompleted = ({
+  taskCompleted,
+  taskId,
+  isListInView1,
+  onRefresh,
+}) => {
   const [completed, setCompleted] = useState(taskCompleted);
 
-  const toggleTaskCompleted = async (id) => {
+  const toggleTaskCompleted = async () => {
     const aux = !completed;
     setCompleted(aux);
 
@@ -20,6 +25,7 @@ const BtnToggleCompleted = ({ taskCompleted, taskId, isListInView1 }) => {
         endpoint,
         {
           completed: aux,
+          status: aux ? 'done' : 'to do',
         },
         {
           headers: {
@@ -27,6 +33,7 @@ const BtnToggleCompleted = ({ taskCompleted, taskId, isListInView1 }) => {
           },
         }
       );
+      onRefresh();
     } catch (error) {
       console.log(error);
     }

@@ -22,11 +22,7 @@ function useLoginForm() {
     event.preventDefault();
 
     try {
-      const response = await axios.post(
-        LOGIN,
-        formData
-      );
-      console.log(response.data.access_token);
+      const response = await axios.post(LOGIN, formData);
       localStorage.setItem('access_token', response.data.access_token);
       navigate('/projects');
     } catch (error) {

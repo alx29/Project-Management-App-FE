@@ -5,3 +5,5 @@ export const ALL_PROJECTS = 'http://localhost:3000/projects/all_projects';
 export const ALL_TASKS_FROM_PROJECT =
   'http://localhost:3000/projects/all_tasks/{project_id}';
 export const UPDATE_TASK = 'http://localhost:3000/tasks/update_task/{task_id}';
+export const DELETE_TASK =
+  'http://localhost:3000/projects/delete_task/{task_id}';

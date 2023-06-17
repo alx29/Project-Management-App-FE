@@ -49,11 +49,7 @@ function useSignupForm() {
     event.preventDefault();
 
     try {
-      const response = await axios.post(
-        SIGNUP,
-        formData
-      );
-      console.log(response.data);
+      const response = await axios.post(SIGNUP, formData);
     } catch (error) {
       console.log(error);
     }

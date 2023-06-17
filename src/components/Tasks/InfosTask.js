@@ -17,12 +17,14 @@ const monthNames = [
 ];
 
 const InfosTask = ({ task, isListInView1 }) => {
-  const { endDate, name, description } = task;
+  const { endDate, name, description, status } = task;
   const [deadline, setDeadline] = useState('');
+  const [newStatus, setNewStatus]= useState('');
 
   useEffect(() => {
-    setDeadline(getDeadline);
-  }, []);
+    setDeadline(getDeadline());
+    setNewStatus(status);
+  }, [task]);
 
   const getDeadline = () => {
     const date = new Date(endDate);
@@ -51,9 +53,12 @@ const InfosTask = ({ task, isListInView1 }) => {
       >
         {description}
       </p>
-      <time className='mt-auto flex w-full'>
-        <Calendar className='mr-2 w-4 sm:w-5' /> {deadline}
-      </time>
+      <div className='flex flex-row justify-between mt-auto flex w-full'>
+        <time className='mt-auto flex w-full'>
+          <Calendar className='mr-2 w-4 sm:w-5' /> {deadline}
+        </time>
+        <div className='mt-auto flex flex-row-reverse w-full text-sm'>{newStatus}</div>
+      </div>
     </div>
   );
 };
