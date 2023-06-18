@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import InfosTask from './InfosTask';
 import ActionsTaskItem from './ActionsTaskItem';
 
 const TaskItem = ({ isListInView1, task, onRefresh }) => {
-  const { projectName, _id } = task;
+  const { projectName } = task;
   const projectId = sessionStorage.getItem('_id');
 
   return (
     <>
       <li>
         <Link
-          to={`/projects/projectPage/${_id}`}
+          to={`/projects/projectPage/${projectId}`}
           title={projectName}
           className='ml-auto mr-4 w-min whitespace-nowrap overflow-hidden max-w-[10rem] text-center text-ellipsis bg-rose-200 text-rose-600 px-4 py-1 rounded-t-md transition dark:bg-slate-700 dark:text-slate-200 block hover:bg-rose-300 dark:hover:bg-rose-500'
         >

@@ -6,8 +6,20 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import LogoutIcon from '@mui/icons-material/Logout';
 import FeedIcon from '@mui/icons-material/Feed';
 import Logo from './Logo';
+import { useEffect, useState } from 'react';
 
 export default function Sidebar() {
+  const role = localStorage.getItem('role');
+  const [access, setAccess] = useState(true);
+
+  useEffect(() => {
+    if (role === 'project_manager') {
+      setAccess(true);
+    } else {
+      setAccess(false);
+    }
+  }, []);
+
   return (
     <div className='sidebar'>
       <div className='user'>
@@ -20,12 +32,14 @@ export default function Sidebar() {
           <span>Dashboard</span>
         </NavLink>
       </div>
-      <div className='item'>
-        <NavLink to='/create'>
-          <AddBoxIcon className='icon' />
-          <span>New Project</span>
-        </NavLink>
-      </div>
+      {access && (
+        <div className='item'>
+          <NavLink to='/create'>
+            <AddBoxIcon className='icon' />
+            <span>New Project</span>
+          </NavLink>
+        </div>
+      )}
       <div className='item'>
         <NavLink to='/projects'>
           <FeedIcon className='icon' />

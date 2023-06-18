@@ -6,7 +6,7 @@ import '../../styles/Tasks.css';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
-function Tasks({ projectId }) {
+function Tasks({ projectId, isTasksPage }) {
   const [tasks, setTasks] = useState([]);
   const [refresh, setRefresh] = useState(0);
   const projectName = sessionStorage.getItem('name');
@@ -32,12 +32,40 @@ function Tasks({ projectId }) {
     const jwt = localStorage.getItem('access_token');
     const endpoint = getEndpoint();
     try {
-      const response = await axios.get(endpoint, {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      });
-      setTasks(response.data);
+      if (!isTasksPage) {
+        const response = await axios.get(endpoint, {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        });
+        setTasks(response.data);
+      } else {
+        const response = await axios.get(
+          'http://localhost:3000/tasks/all_tasks',
+          {
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+            },
+          }
+        );
+
+        const userId = localStorage.getItem('userId');
+        const res = await axios.get(
+          `http://localhost:3000/auth/get_user_by_id/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+            },
+          }
+        );
+        const myTasks = [];
+        for (const t of response.data) {
+          if (t.assignedTo === res.data.username) {
+            myTasks.push(t);
+          }
+        }
+        setTasks(myTasks);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -51,10 +79,17 @@ function Tasks({ projectId }) {
 
   return (
     <div className='tasks'>
-      <div className='projectHeader'>
-        <div className='title'>{projectName}</div>
-        <div>{description}</div>
-      </div>
+      {isTasksPage === false && (
+        <div className='projectHeader'>
+          <div className='title'>{projectName}</div>
+          <div>{description}</div>
+        </div>
+      )}
+      {isTasksPage && (
+        <div className='projectHeader'>
+          <div className='title'>These are your tasks</div>
+        </div>
+      )}
       <AnimatePresence>
         <ul
           className={`tasksList mt-4 grid gap-2 sm:gap-4 xl:gap-6 ${

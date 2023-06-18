@@ -25,6 +25,7 @@ function useLoginForm() {
       const response = await axios.post(LOGIN, formData);
       localStorage.setItem('access_token', response.data.access_token);
       localStorage.setItem('role', response.data.role);
+      localStorage.setItem('userId', response.data.id);
       navigate('/projects');
     } catch (error) {
       console.log(error);

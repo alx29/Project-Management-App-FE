@@ -6,6 +6,7 @@ import Projects from './components/Projects/Projects';
 import ProjectPage from './components/Projects/ProjectPage';
 import Tasks from './components/Tasks/Tasks';
 import CreateTask from './components/Tasks/CreateTask';
+import MyTasks from './components/Tasks/MyTasks';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           <Route path='/create' element={<Create />} />
           <Route path='/projects' element={<Projects />} />
           <Route path='/projects/projectPage/:id' element={<ProjectPage />} />
-          <Route path='/tasks' element={<Tasks />} />
+          <Route path='/tasks' element={<MyTasks />} />
           <Route path='/tasks/createTask' element={<CreateTask />} />
         </Routes>
       </BrowserRouter>
