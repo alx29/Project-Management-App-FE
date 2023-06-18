@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../../styles/ProjectPage.css';
 import Sidebar from '../Sidebar';
 import Tasks from '../Tasks/Tasks';

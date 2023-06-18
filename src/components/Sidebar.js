@@ -4,6 +4,7 @@ import TaskIcon from '@mui/icons-material/Task';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import LogoutIcon from '@mui/icons-material/Logout';
+import FeedIcon from '@mui/icons-material/Feed';
 import Logo from './Logo';
 
 export default function Sidebar() {
@@ -23,6 +24,12 @@ export default function Sidebar() {
         <NavLink to='/create'>
           <AddBoxIcon className='icon' />
           <span>New Project</span>
+        </NavLink>
+      </div>
+      <div className='item'>
+        <NavLink to='/projects'>
+          <FeedIcon className='icon' />
+          <span>My Projects</span>
         </NavLink>
       </div>
       <div className='item'>

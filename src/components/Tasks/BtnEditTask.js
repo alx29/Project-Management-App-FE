@@ -26,11 +26,12 @@ const BtnEditTask = ({ task, onRefresh, nameForm }) => {
         endpoint,
         {
           name: task.name,
-          status: task.status.value,
+          status: task.status,
           description: task.description,
           important: task.important,
           completed: task.completed,
           endDate: task.endDate,
+          assignedTo: task.assignedTo,
         },
         {
           headers: {

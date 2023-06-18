@@ -17,9 +17,9 @@ const monthNames = [
 ];
 
 const InfosTask = ({ task, isListInView1 }) => {
-  const { endDate, name, description, status } = task;
+  const { endDate, name, description, status, assignedTo } = task;
   const [deadline, setDeadline] = useState('');
-  const [newStatus, setNewStatus]= useState('');
+  const [newStatus, setNewStatus] = useState('');
 
   useEffect(() => {
     setDeadline(getDeadline());
@@ -45,19 +45,20 @@ const InfosTask = ({ task, isListInView1 }) => {
       >
         <span className='block font-medium dark:text-slate-200'>{name}</span>
       </div>
+      <div className='text-base'>Assigned to: {assignedTo}</div>
       <p
         title={description}
-        className={`description mb-2 text-slate-500 dark:text-slate-500 ${
-          isListInView1 ? 'line-clamp-2 sm:line-clamp-1' : 'line-clamp-3'
+        className={`description mb-2 text-slate-500 dark:text-slate-500 mt-1 ${
+          isListInView1 ? 'line-clamp-2 sm:line-clamp-1' : 'line-clamp-2'
         }`}
       >
         {description}
       </p>
       <div className='flex flex-row justify-between mt-auto flex w-full'>
-        <time className='mt-auto flex w-full'>
+        <time className='flex w-full'>
           <Calendar className='mr-2 w-4 sm:w-5' /> {deadline}
         </time>
-        <div className='mt-auto flex flex-row-reverse w-full text-sm'>{newStatus}</div>
+        <div className='flex flex-row-reverse w-full text-sm'>{newStatus}</div>
       </div>
     </div>
   );

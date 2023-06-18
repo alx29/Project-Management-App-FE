@@ -3,12 +3,15 @@ import TaskItem from './TaskItem';
 import axios from 'axios';
 import { ALL_TASKS_FROM_PROJECT } from '../../endpoints';
 import '../../styles/Tasks.css';
+import { useNavigate } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 
 function Tasks({ projectId }) {
   const [tasks, setTasks] = useState([]);
   const [refresh, setRefresh] = useState(0);
   const projectName = sessionStorage.getItem('name');
   const description = sessionStorage.getItem('description');
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchTasks();
@@ -40,7 +43,9 @@ function Tasks({ projectId }) {
     }
   };
 
-  const createNewTask = () => {};
+  const createNewTask = () => {
+    navigate('/tasks/createTask');
+  };
 
   const isListInView1 = false;
 
@@ -50,38 +55,49 @@ function Tasks({ projectId }) {
         <div className='title'>{projectName}</div>
         <div>{description}</div>
       </div>
-      <ul
-        className={`tasksList mt-4 grid gap-2 sm:gap-4 xl:gap-6 ${
-          isListInView1
-            ? 'grid-cols-1'
-            : '2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 items-end'
-        }`}
-      >
-        <li>
-          <button
-            onClick={createNewTask}
-            className={`border-2 border-slate-300
+      <AnimatePresence>
+        <ul
+          className={`tasksList mt-4 grid gap-2 sm:gap-4 xl:gap-6 ${
+            isListInView1
+              ? 'grid-cols-1'
+              : '2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 items-end'
+          }`}
+        >
+          <li>
+            <button
+              onClick={createNewTask}
+              className={`border-2 border-slate-300
              text-slate-400 w-full rounded-lg
               border-dashed transition hover:bg-slate-300
                hover:text-slate-500
                dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-300 ${
                  isListInView1 ? 'h-20 sm:h-32' : 'h-52 sm:h-64'
                }`}
-          >
-            Add new task
-          </button>
-        </li>
-        {tasks.map((task) => {
-          return (
-            <TaskItem
-              key={task._id}
-              isListInView1={isListInView1}
-              task={task}
-              onRefresh={onRefresh}
-            />
-          );
-        })}
-      </ul>
+            >
+              Add new task
+            </button>
+          </li>
+          {tasks.map((task) => {
+            return (
+              <motion.div
+                key={task._id}
+                style={{ overflow: 'hidden' }}
+                layout
+                initial={{ transform: 'scale(0)' }}
+                animate={{ transform: 'scale(1)' }}
+                exit={{ transform: 'scale(0)', duration: 0 }}
+              >
+                <TaskItem
+                  key={task._id}
+                  isListInView1={isListInView1}
+                  task={task}
+                  onRefresh={onRefresh}
+                />
+              </motion.div>
+            );
+          })}
+        </ul>
+      </AnimatePresence>
     </div>
   );
 }
