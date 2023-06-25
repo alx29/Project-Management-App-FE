@@ -3,9 +3,16 @@ import BtnEditTask from './BtnEditTask';
 import BtnMarkAsImportant from './BtnMarkAsImportant';
 import BtnDeleteTask from './BtnDeleteTask';
 import BtnToggleCompleted from './BtnToggleCompleted';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { useNavigate } from 'react-router-dom';
 
 const ActionsTaskItem = ({ task, isListInView1, onRefresh }) => {
   const { _id, completed, important } = task;
+  const navigate = useNavigate();
+
+  const seeTask = () => {
+    navigate(`/tasks/${_id}`);
+  };
 
   return (
     <>
@@ -23,6 +30,12 @@ const ActionsTaskItem = ({ task, isListInView1, onRefresh }) => {
         <BtnMarkAsImportant taskId={_id} taskImportant={important} />
         <BtnDeleteTask taskId={_id} onRefresh={onRefresh} />
         <BtnEditTask task={task} onRefresh={onRefresh} nameForm={'Edit task'} />
+        <div className='cursor-pointer transition w-7 sm:w-8 h-6 sm:h-8 grid place-items-center dark:hover:text-slate-200 hover:text-slate-700'>
+          <RemoveRedEyeIcon
+            className='w-4 sm:w-5 h-4 sm:h-5'
+            onClick={seeTask}
+          ></RemoveRedEyeIcon>
+        </div>
       </div>
     </>
   );

@@ -20,7 +20,7 @@ const BtnEditTask = ({ task, onRefresh, nameForm }) => {
     const jwt = localStorage.getItem('access_token');
     const index = UPDATE_TASK.indexOf('{');
     const endpoint =
-      UPDATE_TASK.slice(0, index) + sessionStorage.getItem('_id') + '/' + _id;
+      UPDATE_TASK.slice(0, index) + _id;
 
     try {
       await axios.put(

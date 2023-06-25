@@ -1,0 +1,24 @@
+.notes .taskHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notes .taskHeader .title {
+  font-size: 70px;
+  font-weight: 600;
+  background-image: linear-gradient(to left, #553c9a, #b393d3);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.notes .taskContent {
+  padding: 20px;
+  background-color: #f1f5f9;
+  border-radius: 10px;
+}
+
+.notes .notesContent {
+  padding: 20px;
+}

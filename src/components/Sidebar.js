@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../styles/Sidebar.css';
 import TaskIcon from '@mui/icons-material/Task';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -41,7 +41,7 @@ export default function Sidebar() {
         </div>
       )}
       <div className='item'>
-        <NavLink to='/projects'>
+        <NavLink to='/myProjects'>
           <FeedIcon className='icon' />
           <span>My Projects</span>
         </NavLink>

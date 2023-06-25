@@ -21,7 +21,7 @@ const BtnToggleCompleted = ({
     const endpoint = UPDATE_TASK.slice(0, index) + taskId;
 
     try {
-      await axios.put(
+      const res = await axios.put(
         endpoint,
         {
           completed: aux,

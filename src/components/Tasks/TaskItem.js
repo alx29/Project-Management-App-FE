@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import InfosTask from './InfosTask';
 import ActionsTaskItem from './ActionsTaskItem';
+import { useNavigate } from 'react-router-dom';
 
 const TaskItem = ({ isListInView1, task, onRefresh }) => {
   const { projectName } = task;
   const projectId = sessionStorage.getItem('_id');
+  const navigate = useNavigate();
 
   return (
     <>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import '../../styles/Login.css';
 import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const categories = [
   { value: 'development', label: 'Development' },
@@ -21,6 +22,8 @@ export default function CreateProject() {
   const [category, setCategory] = useState(null);
   const [projectManager, setProjectManager] = useState(null);
   const [options, setOptions] = useState([]);
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -33,6 +36,35 @@ export default function CreateProject() {
   });
 
   useEffect(() => {
+    if (id) {
+      const auxDate = sessionStorage.getItem('endDate');
+      const index = auxDate.indexOf('T');
+      const deadline = auxDate.slice(0, index);
+      setFormData({
+        name: sessionStorage.getItem('name'),
+        description: sessionStorage.getItem('description'),
+        endDate: deadline,
+        budget: parseFloat(sessionStorage.getItem('budget')),
+        category: sessionStorage.getItem('category'),
+        status: sessionStorage.getItem('status'),
+        projectManager: sessionStorage.getItem('projectManager'),
+      });
+
+      setCategory({
+        value: sessionStorage.getItem('category'),
+        label:
+          sessionStorage.getItem('category').charAt(0).toUpperCase() +
+          sessionStorage.getItem('category').slice(1),
+      });
+      setStatus({
+        value: sessionStorage.getItem('status'),
+        label: sessionStorage.getItem('status'),
+      });
+      setProjectManager({
+        value: sessionStorage.getItem('projectManager'),
+        label: sessionStorage.getItem('projectManager'),
+      });
+    }
     fetchData();
   }, []);
 
@@ -68,6 +100,7 @@ export default function CreateProject() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -95,15 +128,38 @@ export default function CreateProject() {
     e.preventDefault();
     try {
       const jwt = localStorage.getItem('access_token');
-      const response = await axios.post(
-        'http://localhost:3000/projects/create_project',
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${jwt}`,
-          },
-        }
-      );
+      if (id) {
+        sessionStorage.setItem('name', formData.name);
+        sessionStorage.setItem('description', formData.description);
+        sessionStorage.setItem('startDate', formData.startDate);
+        sessionStorage.setItem('endDate', formData.endDate);
+        sessionStorage.setItem('budget', formData.budget);
+        sessionStorage.setItem('status', formData.status);
+        sessionStorage.setItem('category', formData.category);
+        sessionStorage.setItem('projectManager', formData.projectManager);
+        sessionStorage.setItem('_id', id);
+        const response = await axios.put(
+          `http://localhost:3000/projects/${id}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+            },
+          }
+        );
+        navigate('/projects');
+      } else {
+        const response = await axios.post(
+          'http://localhost:3000/projects/create_project',
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+            },
+          }
+        );
+        navigate('/projects');
+      }
     } catch (error) {
       console.log(error);
     }
@@ -111,7 +167,11 @@ export default function CreateProject() {
 
   return (
     <div className='loginContainer'>
-      <div className='pageTitle'>Create a new Project</div>
+      {id === undefined ? (
+        <div className='pageTitle'>Create a new Project</div>
+      ) : (
+        <div className='pageTitle'>Edit Project</div>
+      )}
       <form className='login' onSubmit={handleSubmit}>
         <label>
           <div>Project name:</div>
@@ -176,7 +236,11 @@ export default function CreateProject() {
             onChange={handleProjectManagerChange}
           />
         </label>
-        <button className='btn'>Add Project</button>
+        {id === undefined ? (
+          <button className='btn'>Add Project</button>
+        ) : (
+          <button className='btn'>Edit Project</button>
+        )}
       </form>
     </div>
   );

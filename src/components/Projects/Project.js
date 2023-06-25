@@ -37,13 +37,13 @@ function Project({ project }) {
   } = project;
   useEffect(() => {
     if (category === 'development') {
-      setColor('#b52b79');
+      setColor('#E76161');
     } else if (category === 'design') {
       setColor('#BFDFEB');
     } else if (category === 'sales') {
-      setColor('#FF0000');
+      setColor('#B04759');
     } else if (category === 'marketing') {
-      setColor('#FA8072');
+      setColor('#8BACAA');
     }
   }, []);
   const styleColor = {

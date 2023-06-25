@@ -15,13 +15,13 @@ function ProjectCategory(props) {
 
   useEffect(() => {
     if (category === 'Development') {
-      setColor('#b52b79');
+      setColor('#E76161');
     } else if (category === 'Design') {
       setColor('#BFDFEB')
     } else if (category === 'Sales') {
-      setColor('#FF0000');
+      setColor('#B04759');
     } else if (category === 'Marketing') {
-      setColor('#FA8072');
+      setColor('#8BACAA');
     } else if (category === 'All') {
       setColor('#95CB26');
     }

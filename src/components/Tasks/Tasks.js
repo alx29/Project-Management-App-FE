@@ -75,13 +75,41 @@ function Tasks({ projectId, isTasksPage }) {
     navigate('/tasks/createTask');
   };
 
+  const handleDelete = async () => {
+    const projectId = sessionStorage.getItem('_id');
+    const jwt = localStorage.getItem('access_token');
+    try {
+      const response = await axios.delete(
+        `http://localhost:3000/projects/delete_project/${projectId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
+      navigate('/projects');
+    } catch (error) {}
+  };
+
+  const handleEdit = () => {
+    navigate(`/editProject/${projectId}`);
+  };
+
   const isListInView1 = false;
 
   return (
     <div className='tasks'>
       {isTasksPage === false && (
         <div className='projectHeader'>
-          <div className='title'>{projectName}</div>
+          <div className='navbar'>
+            <button className='btn' onClick={handleEdit}>
+              Edit Project
+            </button>
+            <div className='title'>{projectName}</div>
+            <button className='btn' onClick={handleDelete}>
+              Delete Project
+            </button>
+          </div>
           <div>{description}</div>
         </div>
       )}
@@ -101,13 +129,10 @@ function Tasks({ projectId, isTasksPage }) {
           <li>
             <button
               onClick={createNewTask}
-              className={`border-2 border-slate-300
-             text-slate-400 w-full rounded-lg
-              border-dashed transition hover:bg-slate-300
-               hover:text-slate-500
-               dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-300 ${
-                 isListInView1 ? 'h-20 sm:h-32' : 'h-52 sm:h-64'
-               }`}
+              className={`border-2 border-black
+             text-black-400 w-full rounded-lg
+              border-dashed transition hover:bg-slate-100
+                ${isListInView1 ? 'h-20 sm:h-32' : 'h-52 sm:h-64'}`}
             >
               Add new task
             </button>

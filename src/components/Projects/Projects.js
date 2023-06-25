@@ -5,16 +5,19 @@ import axios from 'axios';
 import ProjectCategory from './ProjectCategory';
 import Project from './Project';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 const categories = ['All', 'Development', 'Design', 'Sales', 'Marketing'];
 
 function Projects() {
   const [projects, setProjects] = useState([]);
   const [projectsToShow, setProjectsToShow] = useState([]);
+  const location = useLocation();
+
 
   useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [location]);
 
   const fetchProjects = async () => {
     try {
@@ -22,7 +25,7 @@ function Projects() {
       const role = localStorage.getItem('role');
       const userId = localStorage.getItem('userId');
       let endpoint = 'http://localhost:3000/projects/all_projects';
-      if (role !== 'project_manager') {
+      if (role !== 'project_manager' || location.pathname === '/myProjects') {
         endpoint += `/${userId}`;
       }
       const response = await axios.get(endpoint, {
@@ -42,9 +45,11 @@ function Projects() {
       setProjectsToShow(projects);
       return;
     }
+
     const auxProjects = projects.filter(
       (project) => project.category === category.toLowerCase()
     );
+    
     setProjectsToShow(auxProjects);
   };
 
