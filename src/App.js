@@ -4,10 +4,10 @@ import Signup from './components/Authentication/Signup';
 import Create from './components/Projects/Create';
 import Projects from './components/Projects/Projects';
 import ProjectPage from './components/Projects/ProjectPage';
-import Tasks from './components/Tasks/Tasks';
 import CreateTask from './components/Tasks/CreateTask';
 import MyTasks from './components/Tasks/MyTasks';
 import TaskPage from './components/Tasks/TaskPage';
+import CreateNoteContainer from './components/Notes/CreateNoteContainer';
 
 function App() {
   return (
@@ -24,6 +24,10 @@ function App() {
           <Route path='/tasks' element={<MyTasks />} />
           <Route path='/tasks/createTask' element={<CreateTask />} />
           <Route path='/tasks/:id' element={<TaskPage />} />
+          <Route
+            path='/tasks/:id/createNote'
+            element={<CreateNoteContainer />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
