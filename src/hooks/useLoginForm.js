@@ -9,6 +9,7 @@ function useLoginForm() {
     username: '',
     password: '',
   });
+  const [error, setError] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -28,6 +29,7 @@ function useLoginForm() {
       localStorage.setItem('userId', response.data.id);
       navigate('/projects');
     } catch (error) {
+      setError(true);
       console.log(error);
     }
     setFormData({
@@ -36,7 +38,7 @@ function useLoginForm() {
     });
   };
 
-  return { formData, handleInputChange, handleSubmit };
+  return { formData, handleInputChange, handleSubmit, error };
 }
 
 export default useLoginForm;

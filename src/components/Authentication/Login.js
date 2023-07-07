@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import useLoginForm from '../../hooks/useLoginForm';
 
 function Login() {
-  const { formData, handleInputChange, handleSubmit } = useLoginForm();
+  const { formData, handleInputChange, handleSubmit, error } = useLoginForm();
 
   return (
     <div className='loginContainer'>
@@ -30,6 +30,7 @@ function Login() {
           ></input>
         </label>
         <button className='btn'>Log in</button>
+        {error && <div style={{color: 'red'}}>Wrong username or password</div>}
       </form>
     </div>
   );

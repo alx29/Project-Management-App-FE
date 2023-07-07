@@ -11,6 +11,7 @@ function Tasks({ projectId, isTasksPage }) {
   const [refresh, setRefresh] = useState(0);
   const projectName = sessionStorage.getItem('name');
   const description = sessionStorage.getItem('description');
+  const role = localStorage.getItem('role');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -101,14 +102,23 @@ function Tasks({ projectId, isTasksPage }) {
     <div className='tasks'>
       {isTasksPage === false && (
         <div className='projectHeader'>
-          <div className='navbar'>
-            <button className='btn' onClick={handleEdit}>
-              Edit Project
-            </button>
+          <div
+            className='navbar'
+            style={
+              role !== 'project_manager' ? { justifyContent: 'center' } : {}
+            }
+          >
+            {role === 'project_manager' && (
+              <button className='btn' onClick={handleEdit}>
+                Edit Project
+              </button>
+            )}
             <div className='title'>{projectName}</div>
-            <button className='btn' onClick={handleDelete}>
-              Delete Project
-            </button>
+            {role === 'project_manager' && (
+              <button className='btn' onClick={handleDelete}>
+                Delete Project
+              </button>
+            )}
           </div>
           <div>{description}</div>
         </div>

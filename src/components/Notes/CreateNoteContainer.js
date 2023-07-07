@@ -6,12 +6,12 @@ import { useParams } from 'react-router-dom';
 
 function CreateNoteContainer() {
   const params = useParams();
-  const { id } = params;
+  const { id, noteId } = params;
 
   return (
     <div className='createContainer'>
       <Sidebar />
-      <CreateNote id={id} />
+      <CreateNote id={id} noteId={noteId}/>
     </div>
   );
 }

@@ -28,6 +28,10 @@ function App() {
             path='/tasks/:id/createNote'
             element={<CreateNoteContainer />}
           />
+          <Route
+            path='/tasks/:id/editNote/:noteId'
+            element={<CreateNoteContainer />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

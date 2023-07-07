@@ -22,6 +22,10 @@ function Note({ id, note }) {
     } catch (error) {}
   };
 
+  const updateNote = () => {
+    navigate(`/tasks/${id}/editNote/${note._id}`);
+  };
+
   return (
     <li>
       <article
@@ -42,7 +46,10 @@ function Note({ id, note }) {
             className='w-4 sm:w-5 h-4 sm:h-5 cursor-pointer'
             onClick={deleteNote}
           />
-          <OptionsSvg className='w-4 sm:w-5 h-4 sm:h-5 pr-3 cursor-pointer' />
+          <OptionsSvg
+            className='w-4 sm:w-5 h-4 sm:h-5 pr-3 cursor-pointer'
+            onClick={updateNote}
+          />
         </div>
       </article>
     </li>

@@ -3,7 +3,7 @@ import '../../styles/Login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function CreateNote({ id }) {
+function CreateNote({ id, noteId }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
@@ -13,7 +13,30 @@ function CreateNote({ id }) {
 
   useEffect(() => {
     getTaskName();
+    if (noteId) {
+      getNote();
+    }
   }, []);
+
+  const getNote = async () => {
+    const jwt = localStorage.getItem('access_token');
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/notes/${noteId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
+      const note = response.data;
+      setFormData((prevData) => ({
+        ...prevData,
+        name: note.name,
+        content: note.content,
+      }));
+    } catch (error) {}
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -44,19 +67,41 @@ function CreateNote({ id }) {
     e.preventDefault();
     const jwt = localStorage.getItem('access_token');
     try {
-      await axios.put(`http://localhost:3000/tasks/add_note/${id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      });
+      if (noteId) {
+        await axios.put(
+          `http://localhost:3000/notes/update_note/${noteId}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+            },
+          }
+        );
 
-      navigate(`/tasks/${id}`);
+        navigate(`/tasks/${id}`);
+      } else {
+        await axios.put(
+          `http://localhost:3000/tasks/add_note/${id}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+            },
+          }
+        );
+
+        navigate(`/tasks/${id}`);
+      }
     } catch (error) {}
   };
 
   return (
     <div className='loginContainer'>
-      <h2 className='pageTitle'>Create Note</h2>
+      {noteId ? (
+        <h2 className='pageTitle'>Edit Note</h2>
+      ) : (
+        <h2 className='pageTitle'>Create Note</h2>
+      )}
       <form className='login' onSubmit={handleSubmit}>
         <label>
           <div>Name:</div>
@@ -78,7 +123,11 @@ function CreateNote({ id }) {
             onChange={handleInputChange}
           ></textarea>
         </label>
-        <button className='btn'>Add Note</button>
+        {noteId ? (
+          <button className='btn'>Edit Note</button>
+        ) : (
+          <button className='btn'>Add Note</button>
+        )}
       </form>
     </div>
   );

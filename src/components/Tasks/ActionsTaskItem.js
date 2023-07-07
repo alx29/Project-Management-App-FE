@@ -27,7 +27,7 @@ const ActionsTaskItem = ({ task, isListInView1, onRefresh }) => {
           isListInView1={isListInView1}
           onRefresh={onRefresh}
         />
-        <BtnMarkAsImportant taskId={_id} taskImportant={important} />
+        <BtnMarkAsImportant taskId={_id} taskImportant={important} onRefresh={onRefresh}/>
         <BtnDeleteTask taskId={_id} onRefresh={onRefresh} />
         <BtnEditTask task={task} onRefresh={onRefresh} nameForm={'Edit task'} />
         <div className='cursor-pointer transition w-7 sm:w-8 h-6 sm:h-8 grid place-items-center dark:hover:text-slate-200 hover:text-slate-700'>

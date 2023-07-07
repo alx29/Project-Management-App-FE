@@ -169,7 +169,7 @@ function CreateTaskForm() {
             onChange={handleAssignedToChange}
           />
         </label>
-        <label className='mt-2'>
+        {/* <label className='mt-2'>
           <InputCheckbox
             isChecked={isImportant}
             setChecked={setIsImportant}
@@ -182,7 +182,7 @@ function CreateTaskForm() {
             setChecked={setIsCompleted}
             label='Mark as completed'
           />
-        </label>
+        </label> */}
         <button className='btn'>Add Task</button>
       </form>
     </div>

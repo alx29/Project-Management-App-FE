@@ -3,7 +3,7 @@ import { ReactComponent as StarLine } from '../../assets/star-line.svg';
 import axios from 'axios';
 import { UPDATE_TASK } from '../../endpoints';
 
-const BtnMarkAsImportant = ({ taskId, taskImportant }) => {
+const BtnMarkAsImportant = ({ taskId, taskImportant, onRefresh }) => {
   const [important, setImportant] = useState(taskImportant);
 
   const markAsImportantHandler = async () => {
@@ -26,6 +26,7 @@ const BtnMarkAsImportant = ({ taskId, taskImportant }) => {
           },
         }
       );
+      onRefresh();
     } catch (error) {
       console.log(error);
     }
